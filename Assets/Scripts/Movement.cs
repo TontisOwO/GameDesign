@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -32,6 +31,7 @@ public class Movement : MonoBehaviour
         {
             myRigidbody.linearVelocity += new Vector2(0, jumpSpeed);
             jumping = true;
+            Debug.Log("eh?");
         }
         if (jumping)
         {
@@ -60,13 +60,19 @@ public class Movement : MonoBehaviour
         }
         transform.position = movementVector;
     }
-    private void OnCollisionEnter2D(Collision2D other)
+    public void Land()
     {
-        if (other.gameObject.CompareTag("Floor"))
+        Debug.Log("ha gayer");
+        air = false;
+        jumping = false;
+        jumpTime = 0;
+    }
+    public void FallOf()
+    {
+        if (!jumping)
         {
-            air = false;
-            jumping = false;
-            jumpTime = 0;
+            air = true;
         }
+        Debug.Log("lamoer");
     }
 }
