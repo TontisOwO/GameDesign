@@ -2,23 +2,31 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float bulletSpeed;
+    public float bulletSpeed = 10f;
+    public int damage = 25;
     private Rigidbody2D rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        // Find the barrel GameObject
         GameObject barrel = GameObject.Find("barrel");
         if (barrel != null)
         {
-            // Set bullet velocity based on the barrel's localScale direction
             rb.linearVelocity = transform.right * barrel.transform.localScale.x * bulletSpeed;
         }
-        else
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Check if the object hit has the EnemyHealth script
+        EnemyHealth enemy = collision.gameObject.GetComponent<EnemyHealth>();
+        if (enemy != null)
         {
-            Debug.LogError("Barrel GameObject not found!");
+            enemy.TakeDamage(damage);
+            Debug.Log($"Bullet hit {collision.gameObject.name}, dealing {damage} damage.");
         }
+
+        // Destroy the bullet on collision
+        Destroy(gameObject);
     }
 }
