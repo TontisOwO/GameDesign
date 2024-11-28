@@ -133,4 +133,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPos: {fileID: 1115881001294147021}
-  bullet: {fileID: 1150959087863272390, guid: 88e0798bc2ece774381bc7ba5868324b, type: 3}
+  bulletPrefab: {fileID: 1150959087863272390, guid: 88e0798bc2ece774381bc7ba5868324b, type: 3}
