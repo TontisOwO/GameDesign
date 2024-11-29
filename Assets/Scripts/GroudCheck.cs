@@ -9,7 +9,6 @@ public class GroudCheck : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("ha gay");
         if (other.gameObject.CompareTag("Floor"))
         {
             parent.Land();
@@ -17,7 +16,6 @@ public class GroudCheck : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        parent.FallOf();
-        Debug.Log("lamo");
+        parent.FallOff();
     }
 }

@@ -1,5 +1,11 @@
 using UnityEngine;
 
+enum CharacterState
+{
+    Grounded,
+    Jumping,
+    Air
+}
 public class Movement : MonoBehaviour
 {
     Rigidbody2D myRigidbody;
@@ -7,8 +13,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float jumpSpeed;
     float jumpFactor;
     float jumpTime;
-    [SerializeField] bool jumping;
-    [SerializeField] bool air;
+    [SerializeField] CharacterState jumpState;
     Vector2 movementVector;
     void Awake()
     {
@@ -17,6 +22,7 @@ public class Movement : MonoBehaviour
     void Update()
     {
         movementVector = transform.position;
+
         if (Input.GetKey(KeyCode.A))
         {
             movementVector.x -= movementSpeed * Time.deltaTime;
@@ -27,16 +33,18 @@ public class Movement : MonoBehaviour
             movementVector.x += movementSpeed * Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.Space) && !air && !jumping)
+        if (Input.GetKey(KeyCode.Space) && jumpState == CharacterState.Grounded)
         {
-            myRigidbody.linearVelocity += new Vector2(0, jumpSpeed);
-            jumping = true;
+            myRigidbody.linearVelocityY += jumpSpeed;
+            jumpState = CharacterState.Jumping;
             Debug.Log("eh?");
         }
-        if (jumping)
+
+        if (jumpState == CharacterState.Jumping)
         {
             jumpTime += Time.deltaTime;
         }
+
         if (Input.GetKeyUp(KeyCode.Space))
         {
             switch (jumpTime, jumpTime)
@@ -55,24 +63,35 @@ public class Movement : MonoBehaviour
             }
             myRigidbody.linearVelocity -= new Vector2(0, jumpFactor * jumpSpeed);
             jumpTime = 0;
-            jumping = false;
-            air = true;
+            jumpState = CharacterState.Air;
         }
+
         transform.position = movementVector;
     }
+    //void OnCollisionEnter2D(Collision2D other)
+    //{
+    //    if (other.gameObject.CompareTag("Floor"))
+    //    {
+    //        Land();
+    //    }
+    //}
     public void Land()
     {
-        Debug.Log("ha gayer");
-        air = false;
-        jumping = false;
+        jumpState = CharacterState.Grounded;
         jumpTime = 0;
     }
-    public void FallOf()
+    //void OnCollisionExit2D(Collision2D other)
+    //{
+    //    if (jumpState != CharacterState.Jumping)
+    //    {
+    //        FallOff();
+    //    }
+    //}
+    public void FallOff()
     {
-        if (!jumping)
+        if (jumpState != CharacterState.Jumping)
         {
-            air = true;
+            jumpState = CharacterState.Air;
         }
-        Debug.Log("lamoer");
     }
 }
