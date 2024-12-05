@@ -1,50 +1,88 @@
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    public Transform spawnPos;   
-    public GameObject bulletPrefab;
+    public Transform spawnPos;               // Bullet spawn position
+    public GameObject chargingBulletPrefab;  // Prefab for the charging bullet
+    public GameObject activeBulletPrefab;    // Prefab for the active bullet
 
-    private float chargeTime = 0f;
-    private float maxChargeTime = 5f;
-    private bool isCharging = false;
+    private GameObject chargingBullet;       // Reference to the charging bullet
+    private float chargeTime = 0f;           // Time the button is held
+    private float maxChargeTime = 2f;        // Time needed to reach max charge
+    private bool isCharging = false;         // Whether charging is happening
 
     void Update()
     {
-
         if (Input.GetMouseButtonDown(0))
         {
-            isCharging = true;
-            chargeTime = 0f;
+            StartCharging();
         }
 
-        // Continue charging while mouse button is held
         if (Input.GetMouseButton(0) && isCharging)
         {
-            chargeTime += Time.deltaTime;
-            chargeTime = Mathf.Clamp(chargeTime, 0f, maxChargeTime);
+            UpdateCharging();
         }
 
-        // Release to shoot
-        if (Input.GetMouseButtonUp(0) && isCharging)
+        if (Input.GetMouseButtonUp(0))
         {
-            Shoot();
-            isCharging = false;
+            FireChargedBullet();
         }
     }
 
-    void Shoot()
+    void StartCharging()
     {
-        // Instantiate the bullet
-        GameObject bulletInstance = Instantiate(bulletPrefab, spawnPos.position, spawnPos.rotation);
+        isCharging = true;
+        chargeTime = 0f;
 
-        // Get the Bullet script and set damage based on charge time
-        Bullet bulletScript = bulletInstance.GetComponent<Bullet>();
+        // Create the charging bullet without resetting its scale
+        chargingBullet = Instantiate(chargingBulletPrefab, spawnPos.position, spawnPos.rotation);
+    }
+
+    void UpdateCharging()
+    {
+        chargeTime += Time.deltaTime;
+        chargeTime = Mathf.Clamp(chargeTime, 0f, maxChargeTime); // Limit to max charge time
+
+        // Make the charging bullet follow the spawn position
+        if (chargingBullet != null)
+        {
+            chargingBullet.transform.position = spawnPos.position;
+
+            // Scale the charging bullet based on charge time
+            float chargeScale = Mathf.Lerp(1f, 2f, chargeTime / maxChargeTime);
+            chargingBullet.transform.localScale = chargingBulletPrefab.transform.localScale * chargeScale;
+        }
+
+    }
+
+    void Blinking()
+    {
+        if (chargeTime <= maxChargeTime)
+        {
+            
+        }
+
+    }
+
+    void FireChargedBullet()
+    {
+        if (chargingBullet != null)
+        {
+            Destroy(chargingBullet); // Remove the charging bullet
+        }
+
+        isCharging = false;
+
+        // Instantiate the active bullet
+        GameObject activeBullet = Instantiate(activeBulletPrefab, spawnPos.position, spawnPos.rotation);
+
+        // Get the Bullet script and set the charge-based damage
+        Bullet bulletScript = activeBullet.GetComponent<Bullet>();
         if (bulletScript != null)
         {
-            float chargeMultiplier = Mathf.Lerp(1f, 2f, chargeTime / maxChargeTime); // Scales from 1x to 2x
-            bulletScript.damage = Mathf.RoundToInt(bulletScript.damage * chargeMultiplier);
-            Debug.Log($"Fired bullet with damage: {bulletScript.damage} (Charge: {chargeTime:F2}s)");
+            float chargeMultiplier = Mathf.Lerp(1f, 2f, chargeTime / maxChargeTime);
+            bulletScript.SetCharge(chargeMultiplier); // Apply charge multiplier to the active bullet
         }
     }
 }
