@@ -10,8 +10,11 @@ public class Movement : MonoBehaviour
 {
     Rigidbody2D myRigidbody;
     [SerializeField] float movementSpeed;
+    [SerializeField] float AccelDeccelSpeed;
     float movementSpeedLeft;
     float movementSpeedRight;
+    bool movingLeft;
+    bool movingRight;
     [SerializeField] float jumpSpeed;
     float jumpFactor;
     float jumpTime;
@@ -27,29 +30,47 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            if (movementSpeedLeft < movementSpeed)
-            {
-                movementSpeedLeft += Time.deltaTime * movementSpeed * 5;
-            }
-            movementVector.x -= movementSpeedLeft * Time.deltaTime;
+            movingLeft = true;
         }
         if (!Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
-            movementSpeedLeft = movementSpeed * 0.25f;
+            movingLeft = false;
+        }
+        if (movingLeft)
+        {
+            if (movementSpeedLeft < movementSpeed)
+            {
+                movementSpeedLeft += Time.deltaTime * movementSpeed * AccelDeccelSpeed;
+            }
+            movementVector.x -= movementSpeedLeft * Time.deltaTime;
+        }
+        else if (movementSpeedLeft > movementSpeed * 0.25f)
+        {
+            movementSpeedLeft -= Time.deltaTime * movementSpeed * AccelDeccelSpeed;
+            movementVector.x -= movementSpeedLeft * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            if (movementSpeedRight < movementSpeed)
-            {
-                movementSpeedRight += Time.deltaTime * movementSpeed * 5;
-            }
-            movementVector.x += movementSpeedRight * Time.deltaTime;
+            movingRight = true;
         }
         if (!Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
         {
-            movementSpeedRight = movementSpeed * 0.25f;
+            movingRight = false;
 
+        }
+        if (movingRight)
+        {
+            if (movementSpeedRight < movementSpeed)
+            {
+                movementSpeedRight += Time.deltaTime * movementSpeed * AccelDeccelSpeed;
+            }
+            movementVector.x += movementSpeedRight * Time.deltaTime;
+        }
+        else if (movementSpeedRight > movementSpeed * 0.25f)
+        {
+            movementSpeedRight -= Time.deltaTime * movementSpeed * AccelDeccelSpeed;
+            movementVector.x += movementSpeedRight * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.Space) && jumpState == CharacterState.Grounded)
@@ -88,7 +109,10 @@ public class Movement : MonoBehaviour
             myRigidbody.linearVelocity -= new Vector2(0, jumpFactor * jumpSpeed);
             jumpTime = 0;
         }
-
+        if (Input.GetKey(KeyCode.S) && jumpState == CharacterState.Air)
+        {
+            movementVector.y -= movementSpeed * Time.deltaTime;
+        }
         transform.position = movementVector;
     }
     //void OnCollisionEnter2D(Collision2D other)

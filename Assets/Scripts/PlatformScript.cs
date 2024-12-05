@@ -13,26 +13,26 @@ public class PlatformScript : MonoBehaviour
         vectorValue0 = Vector2.zero;
         myRidgidbody = GetComponent<Rigidbody2D>();
     }
-    void Update()
+    void FixedUpdate()
     {
         timeTaken += Time.deltaTime;
         if (!isStatic)
         {
             switch (timeTaken)
             {
-                case < 1f:
+                case <= 1f:
                     myRidgidbody.linearVelocity = Vector2.Lerp(vectorValue0, destination, 1);
                     break;
-                case < 2f:
+                case <= 2f:
                     myRidgidbody.linearVelocity = vectorValue0;
                     break;
-                case < 3f:
+                case <= 3f:
                     myRidgidbody.linearVelocity = Vector2.Lerp(vectorValue0, -destination, 1);
                     break;
-                case < 4f:
+                case <= 4f:
                     myRidgidbody.linearVelocity = vectorValue0;
                     break;
-                case < 5f:
+                case <= 5f:
                     timeTaken = 0;
                     break;
             }

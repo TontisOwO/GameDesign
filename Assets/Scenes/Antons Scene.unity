@@ -459,12 +459,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 677405114}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.218, y: 1.65, z: 0}
-  m_LocalScale: {x: 0.091666, y: 2.5917, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.9001174, y: -2.35875, z: 0}
+  m_LocalScale: {x: 1.6357409, y: 3.1748326, z: 1.225}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 723027704}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &677405116
 BoxCollider2D:
@@ -726,8 +726,7 @@ Transform:
   m_LocalPosition: {x: -0.01, y: -4.38, z: 0}
   m_LocalScale: {x: 17.844576, y: 1.225, z: 1.225}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 677405115}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &723027705
@@ -789,7 +788,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b2712fc1695d94085e26c3929bebb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 12
+  AccelDeccelSpeed: 7
   jumpSpeed: 20
   jumpState: 0
 --- !u!212 &927558187
@@ -1122,5 +1122,6 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 927558188}
+  - {fileID: 677405115}
   - {fileID: 723027704}
   - {fileID: 1639417430}
