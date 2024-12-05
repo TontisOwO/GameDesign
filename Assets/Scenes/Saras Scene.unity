@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 1446232197}
   - component: {fileID: 1446232201}
   - component: {fileID: 1446232200}
+  - component: {fileID: 1446232202}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -266,7 +267,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15.529694
+  orthographic size: 22.329184
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -291,7 +292,7 @@ Transform:
   m_GameObject: {fileID: 1446232196}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.34432, y: -0.041608863, z: -10.055297}
+  m_LocalPosition: {x: 4.318596, y: -2.1916823, z: -44.78166}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -355,6 +356,38 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1446232202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446232196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowDebugText: 0
+  ShowCameraFrustum: 1
+  IgnoreTimeScale: 0
+  WorldUpOverride: {fileID: 0}
+  ChannelMask: -1
+  UpdateMethod: 2
+  BlendUpdateMethod: 1
+  LensModeOverride:
+    Enabled: 0
+    DefaultMode: 2
+  DefaultBlend:
+    Style: 1
+    Time: 2
+    CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  CustomBlends: {fileID: 0}
 --- !u!1 &1694686235 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6358095876444431873, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
@@ -372,6 +405,7 @@ GameObject:
   - component: {fileID: 1993256194}
   - component: {fileID: 1993256193}
   - component: {fileID: 1993256192}
+  - component: {fileID: 1993256196}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Floor
@@ -522,6 +556,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1993256196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993256191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b5a3b21ff7b8ea45965f2a3c4803b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 1569052678960676096}
 --- !u!1001 &1569052678960676090
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -678,8 +725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 6
   jumpSpeed: 12
-  jumping: 0
-  air: 0
+  jumpState: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
