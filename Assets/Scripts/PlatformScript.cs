@@ -2,14 +2,21 @@ using UnityEngine;
 
 public class PlatformScript : MonoBehaviour
 {
+    [Header("Private variables")]
+
     [SerializeField] bool isStatic;
     [SerializeField] float waitTime = 1.0f;
     [SerializeField] Vector2 destination;
     Vector2 vectorValue0;
     [SerializeField] float timeTaken;
     Rigidbody2D myRidgidbody;
+
+    [Header("Public variables")]
+
+    public Vector2 moveVector;
     private void Awake()
     {
+        moveVector = destination;
         vectorValue0 = Vector2.zero;
         myRidgidbody = GetComponent<Rigidbody2D>();
     }

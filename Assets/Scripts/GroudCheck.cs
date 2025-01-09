@@ -37,6 +37,13 @@ public class GroudCheck : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        parent.FallOff();
+        if (other.GetComponent<PlatformScript>() != null)
+        {
+            parent.FallOff(other.GetComponent<PlatformScript>().moveVector);
+        }
+        else
+        {
+            parent.FallOff(new Vector2(0, 0));
+        }
     }
 }

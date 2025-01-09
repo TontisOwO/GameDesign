@@ -11,15 +11,20 @@ public class Movement : MonoBehaviour
     Rigidbody2D myRigidbody;
     [SerializeField] float movementSpeed;
     [SerializeField] float AccelDeccelSpeed;
+    [SerializeField] float smallHopFall = 0.5f;
+    [SerializeField] float coyoteTime;
     float movementSpeedLeft;
     float movementSpeedRight;
     bool movingLeft;
     bool movingRight;
+    bool smallHop;
     [SerializeField] float jumpSpeed;
     float jumpFactor;
     float jumpTime;
     [SerializeField] CharacterState jumpState;
     Vector2 movementVector;
+    [SerializeField] float timeAfterWalkOff;
+    bool fellOff = true;
     void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
@@ -95,24 +100,42 @@ public class Movement : MonoBehaviour
             switch (jumpTime, jumpTime)
             {
                 case ( > 0, <= 0.1f):
-                    jumpFactor = 0.7f;
+                    smallHop = true;
                     break;
 
                 case ( > 0.1f, <= 0.25f):
-                    jumpFactor = 0.3f;
+                    jumpFactor = 0.25f;
                     break;
 
                 case ( > 0.25f, <= 100f):
                     jumpFactor = 0f;
                     break;
             }
-            myRigidbody.linearVelocity -= new Vector2(0, jumpFactor * jumpSpeed);
+            myRigidbody.linearVelocityY -= jumpFactor * jumpSpeed;
             jumpTime = 0;
+        }
+        if (smallHop)
+        {
+            myRigidbody.linearVelocityY -= smallHopFall * jumpSpeed * Time.deltaTime;
+            if (myRigidbody.linearVelocityY < 0) 
+            {
+                smallHop = false;
+            }
         }
         if (Input.GetKey(KeyCode.S) && jumpState == CharacterState.Air)
         {
             movementVector.y -= movementSpeed * Time.deltaTime;
         }
+        if (fellOff)
+        {
+            timeAfterWalkOff += Time.deltaTime;
+        }
+        if (timeAfterWalkOff > coyoteTime) 
+        {
+            timeAfterWalkOff = 0;
+            jumpState = CharacterState.Air;
+        }
+
         transform.position = movementVector;
     }
     //void OnCollisionEnter2D(Collision2D other)
@@ -132,6 +155,7 @@ public class Movement : MonoBehaviour
     {
         myRigidbody.linearVelocityY = groundSpeed;
         jumpState = CharacterState.Grounded;
+        fellOff = false;
     }
     //void OnCollisionExit2D(Collision2D other)
     //{
@@ -140,11 +164,9 @@ public class Movement : MonoBehaviour
     //        FallOff();
     //    }
     //}
-    public void FallOff()
+    public void FallOff(Vector2 groundSpeed)
     {
-        if (jumpState != CharacterState.Jumping)
-        {
-            jumpState = CharacterState.Air;
-        }
+        fellOff = true;
+        myRigidbody.linearVelocity -= groundSpeed;
     }
 }
