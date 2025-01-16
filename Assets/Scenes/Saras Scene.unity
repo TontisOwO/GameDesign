@@ -1000,6 +1000,34 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.52128416
       objectReference: {fileID: 0}
+    - target: {fileID: 1875163052508847375, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
+      propertyPath: m_GravityScale
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4909413303812818203, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242037290405032152, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
+      propertyPath: jumpSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242037290405032152, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
+      propertyPath: coyoteTime
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242037290405032152, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
+      propertyPath: smallHopFall
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242037290405032152, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
+      propertyPath: movementSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242037290405032152, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
+      propertyPath: AccelDeccelSpeed
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6358095876444431873, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
       propertyPath: m_Name
       value: Player1
@@ -1007,6 +1035,22 @@ PrefabInstance:
     - target: {fileID: 6358095876444431873, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101281415135133509, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
+      propertyPath: m_Size.x
+      value: 3.7162902
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101281415135133509, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
+      propertyPath: m_Size.y
+      value: 0.047449112
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101281415135133509, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0084296465
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101281415135133509, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
+      propertyPath: m_Offset.y
+      value: -2.3165107
       objectReference: {fileID: 0}
     - target: {fileID: 8435505839985715498, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
       propertyPath: m_LocalScale.x
