@@ -495,6 +495,7 @@ GameObject:
   - component: {fileID: 1446232197}
   - component: {fileID: 1446232201}
   - component: {fileID: 1446232200}
+  - component: {fileID: 1446232202}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -634,6 +635,62 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1446232202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446232196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb074182f3ceaf4dab0535da8bd5394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  start: 0
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0010185242
+      value: 0.009433746
+      inSlope: 2.012808
+      outSlope: 2.012808
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.1708932
+      value: 0.35545906
+      inSlope: 0.73454815
+      outSlope: 0.73454815
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5143424
+      value: 0.16872168
+      inSlope: -0.4426891
+      outSlope: -0.4426891
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9989624
+      value: 0.0031433105
+      inSlope: -0.3416664
+      outSlope: -0.3416664
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  duration: 1
 --- !u!1 &1690086572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,6 +1093,13 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6502851347018949654, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
+      propertyPath: cameraShake
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6502851347018949654, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
+      propertyPath: shakeScript
+      value: 
     - target: {fileID: 7101281415135133509, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
       propertyPath: m_Size.x
       value: 3.7162902
@@ -1062,11 +1126,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8435505839985715498, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.171
+      value: -1.15
       objectReference: {fileID: 0}
     - target: {fileID: 8435505839985715498, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.314
+      value: -2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8435505839985715498, guid: 596b9ea6e6257cd4e8a30134e0933653, type: 3}
       propertyPath: m_LocalPosition.z
