@@ -8,6 +8,8 @@ public class Shooting : MonoBehaviour
     public GameObject chargingBulletPrefab;  // Prefab for the charging bullet
     public GameObject activeBulletPrefab;    // Prefab for the active bullet
 
+    // I added screenshake in this script that is activated when the player shoots (Sara)
+
     public float shakeDuration = 0.2f;       // Duration of the shake effect
     public float shakeMagnitude = 0.1f;      // Intensity of the shake effect
 

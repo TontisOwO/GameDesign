@@ -17,4 +17,5 @@ public class CameraFollow : MonoBehaviour
         float frameRateConsistent = Mathf.Pow(0.5f, Time.deltaTime * CameraMovementSpeed);
         transform.position =  Vector3.Lerp(PlayerTransform.position + new Vector3(0, 0, zOffset), transform.position, frameRateConsistent);
     }
+
 }
