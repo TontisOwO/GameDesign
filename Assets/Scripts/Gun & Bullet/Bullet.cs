@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
             return; // Prevent charging bullets from interacting
 
         // Check if the object hit has the EnemyHealth script
-        EnemyHealth enemy = collision.gameObject.GetComponent<EnemyHealth>();
+        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         if (enemy != null)
         {
             enemy.TakeDamage(damage);
