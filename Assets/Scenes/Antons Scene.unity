@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -348,6 +349,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4e4bc629a6cea541bb31af211aece48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTransform: {fileID: 927558188}
+  CameraMovementSpeed: 4
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,7 +460,7 @@ GameObject:
   - component: {fileID: 677405116}
   - component: {fileID: 677405118}
   m_Layer: 0
-  m_Name: Floor
+  m_Name: Movable Box
   m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -557,7 +572,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.13333334, g: 0.13333334, b: 0.13333334, a: 1}
+  m_Color: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -704,7 +719,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 1}
+  m_Color: {r: 0.35220122, g: 0.35220122, b: 0.35220122, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -723,8 +738,8 @@ Transform:
   m_GameObject: {fileID: 723027701}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.01, y: -4.38, z: 0}
-  m_LocalScale: {x: 17.844576, y: 1.225, z: 1.225}
+  m_LocalPosition: {x: -0.0099996, y: -4.38, z: 0}
+  m_LocalScale: {x: 52.195385, y: 1.225, z: 1.225}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -790,8 +805,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 12
   AccelDeccelSpeed: 7
+  smallHopFall: 7
+  coyoteTime: 0.15
   jumpSpeed: 20
   jumpState: 0
+  timeAfterWalkOff: 0
 --- !u!212 &927558187
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1001,7 +1019,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.13333334, g: 0.13333334, b: 0.13333334, a: 1}
+  m_Color: {r: 0.3529412, g: 0.3529412, b: 0.3529412, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1115,6 +1133,7 @@ MonoBehaviour:
   waitTime: 1
   destination: {x: -1, y: 5}
   timeTaken: 0
+  moveVector: {x: 0, y: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
