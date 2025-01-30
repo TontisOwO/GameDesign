@@ -810,6 +810,7 @@ MonoBehaviour:
   jumpSpeed: 20
   jumpState: 0
   timeAfterWalkOff: 0
+  DustParticle: {fileID: 2844740396991405199, guid: 3d9240024954c4544ac2e3f3dc828afa, type: 3}
 --- !u!212 &927558187
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1130,7 +1131,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStatic: 0
-  waitTime: 1
   destination: {x: -1, y: 5}
   timeTaken: 0
   moveVector: {x: 0, y: 0}

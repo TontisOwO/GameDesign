@@ -9,6 +9,7 @@ enum CharacterState
 public class Movement : MonoBehaviour
 {
     Rigidbody2D myRigidbody;
+    BoxCollider2D myCollider;
     [SerializeField] float movementSpeed;
     [SerializeField] float AccelDeccelSpeed;
     [SerializeField] float smallHopFall = 0.5f;
@@ -25,9 +26,13 @@ public class Movement : MonoBehaviour
     Vector2 movementVector;
     [SerializeField] float timeAfterWalkOff;
     bool fellOff = true;
+
+    [SerializeField] GameObject DustParticle;
+
     void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        myCollider = GetComponent<BoxCollider2D>();
     }
     void Update()
     {
@@ -134,6 +139,11 @@ public class Movement : MonoBehaviour
         {
             timeAfterWalkOff = 0;
             jumpState = CharacterState.Air;
+        }
+
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A))
+        {
+            Instantiate(DustParticle, transform.position, transform.rotation);
         }
 
         transform.position = movementVector;
