@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
     {
         //enemyHealth
         CurrentHealth -= damage;
+
         if (CurrentHealth <= 0)
         {
             Die();

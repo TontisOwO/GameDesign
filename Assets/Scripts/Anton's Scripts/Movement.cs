@@ -7,6 +7,7 @@ enum CharacterState
     Air
 }
 public class Movement : MonoBehaviour
+
 {
     Rigidbody2D myRigidbody;
     BoxCollider2D myCollider;
@@ -34,8 +35,10 @@ public class Movement : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
         myCollider = GetComponent<BoxCollider2D>();
     }
+
     void Update()
     {
+
         movementVector = transform.position;
 
         if (Input.GetKey(KeyCode.A))
@@ -179,4 +182,5 @@ public class Movement : MonoBehaviour
         fellOff = true;
         myRigidbody.linearVelocity -= groundSpeed;
     }
+
 }
