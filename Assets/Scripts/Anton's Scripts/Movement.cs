@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 enum CharacterState
@@ -7,6 +9,7 @@ enum CharacterState
     Air
 }
 public class Movement : MonoBehaviour
+
 {
     Rigidbody2D myRigidbody;
     [SerializeField] float movementSpeed;
@@ -25,12 +28,15 @@ public class Movement : MonoBehaviour
     Vector2 movementVector;
     [SerializeField] float timeAfterWalkOff;
     bool fellOff = true;
+
     void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
     }
+
     void Update()
     {
+
         movementVector = transform.position;
 
         if (Input.GetKey(KeyCode.A))
@@ -169,4 +175,5 @@ public class Movement : MonoBehaviour
         fellOff = true;
         myRigidbody.linearVelocity -= groundSpeed;
     }
+
 }
