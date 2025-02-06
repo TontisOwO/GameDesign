@@ -1,12 +1,21 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 
 public class Enemy : MonoBehaviour
 {
+    //Attack related
+    [SerializeField] Animator enemyAnim;
+    float attackTimer;
+    float attackTime = 3;
+
+
     //EnemySeek
-    GameObject moveTowardsThis;
+
+  
+          GameObject moveTowardsThis;
 
     //Health
     public int MaxHealth = 100;
@@ -31,11 +40,28 @@ public class Enemy : MonoBehaviour
     }
     void Update()
     {
+
+        attackTimer -= Time.deltaTime;
+
+        if(attackTimer < 0)
+        {
+            attackTimer = 0;
+        }
+
+        if(attackTimer == 0)
+        {
+            enemyAnim.SetTrigger("Attack");
+            attackTimer = attackTime;
+        }
+
         //enemySeek
         transform.position = Vector3.MoveTowards(transform.position, moveTowardsThis.transform.position, 0.035f);
 
         //enemyBehaviour
         rb.linearVelocity = transform.right * EnemySpeed;
+
+
+
 
     }
 
