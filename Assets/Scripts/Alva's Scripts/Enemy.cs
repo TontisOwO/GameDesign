@@ -11,12 +11,14 @@ public class Enemy : MonoBehaviour
     float attackTimer;
     float attackTime = 3;
     bool seesPlayer;
+    bool TakingDamage;
 
 
     //EnemySeek
 
-  
-          GameObject moveTowardsThis;
+
+    GameObject moveTowardsThis;
+    GameObject theEnemy;
 
     //Health
     public int MaxHealth = 100;
@@ -32,6 +34,8 @@ public class Enemy : MonoBehaviour
         //enemySeek
         moveTowardsThis = GameObject.FindWithTag("Player");
 
+        theEnemy = GameObject.FindWithTag("Enemy");
+
         //health
         CurrentHealth = MaxHealth;
 
@@ -41,9 +45,9 @@ public class Enemy : MonoBehaviour
     }
     void Update()
     {
-       
+        
 
-        if(seesPlayer)
+        if (seesPlayer)
         {
             attackTimer -= Time.deltaTime;
 
@@ -59,17 +63,18 @@ public class Enemy : MonoBehaviour
             }
         }
 
-       
+        if (TakingDamage)
+        {
+            enemyAnim.SetTrigger("Damage");
+            TakingDamage = false;
+            Debug.Log("G");
+        }
 
         //enemySeek
-        transform.position = Vector3.MoveTowards(transform.position, moveTowardsThis.transform.position, 0.035f);
+        theEnemy.transform.position = Vector3.MoveTowards(theEnemy.transform.position, moveTowardsThis.transform.position, 0.035f);
 
         //enemyBehaviour
-       // rb.linearVelocity = transform.right * EnemySpeed;
-
-
-
-
+        // rb.linearVelocity = transform.right * EnemySpeed;
     }
 
     public void TakeDamage(int damage)
@@ -81,6 +86,7 @@ public class Enemy : MonoBehaviour
         {
             Die();
         }
+        TakingDamage = true;
     }
 
     private void Die()
@@ -115,6 +121,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(5);
+        }
+    }
 
 }
 
