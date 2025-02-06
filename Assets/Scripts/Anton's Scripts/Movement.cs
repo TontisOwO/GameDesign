@@ -7,8 +7,10 @@ enum CharacterState
     Air
 }
 public class Movement : MonoBehaviour
+
 {
     Rigidbody2D myRigidbody;
+    BoxCollider2D myCollider;
     [SerializeField] float movementSpeed;
     [SerializeField] float AccelDeccelSpeed;
     [SerializeField] float smallHopFall = 0.5f;
@@ -25,12 +27,18 @@ public class Movement : MonoBehaviour
     Vector2 movementVector;
     [SerializeField] float timeAfterWalkOff;
     bool fellOff = true;
+
+    [SerializeField] GameObject DustParticle;
+
     void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        myCollider = GetComponent<BoxCollider2D>();
     }
+
     void Update()
     {
+
         movementVector = transform.position;
 
         if (Input.GetKey(KeyCode.A))
@@ -150,6 +158,11 @@ public class Movement : MonoBehaviour
             jumpState = CharacterState.Air;
         }
 
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A))
+        {
+            Instantiate(DustParticle, transform.position, transform.rotation);
+        }
+
         transform.position = movementVector;
     }
     //void OnCollisionEnter2D(Collision2D other)
@@ -183,4 +196,5 @@ public class Movement : MonoBehaviour
         fellOff = true;
         myRigidbody.linearVelocity -= groundSpeed;
     }
+
 }

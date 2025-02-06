@@ -5,7 +5,6 @@ public class PlatformScript : MonoBehaviour
     [Header("Private variables")]
 
     [SerializeField] bool isStatic;
-    [SerializeField] float waitTime = 1.0f;
     [SerializeField] Vector2 destination;
     Vector2 vectorValue0;
     [SerializeField] float timeTaken;
