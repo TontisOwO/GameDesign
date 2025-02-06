@@ -4,6 +4,8 @@ public class CameraFollow : MonoBehaviour
 {
     [SerializeField] Transform PlayerTransform;
     [SerializeField] float CameraMovementSpeed;
+    [SerializeField] Vector2 MinBounds;
+    [SerializeField] Vector2 MaxBounds;
     float zOffset;
 
     void Start()
@@ -13,10 +15,14 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
-
-        //I, Anton, have edited a bit here so that it's framerate consistent because it wasn't
+        // Framerate consistent movement
         float frameRateConsistent = Mathf.Pow(0.5f, Time.deltaTime * CameraMovementSpeed);
-        transform.position =  Vector3.Lerp(PlayerTransform.position + new Vector3(0, 0, zOffset), transform.position, frameRateConsistent);
-    }
+        Vector3 targetPosition = Vector3.Lerp(PlayerTransform.position + new Vector3(0, 0, zOffset), transform.position, frameRateConsistent);
 
+        // Apply boundaries
+        targetPosition.x = Mathf.Clamp(targetPosition.x, MinBounds.x, MaxBounds.x);
+        targetPosition.y = Mathf.Clamp(targetPosition.y, MinBounds.y, MaxBounds.y);
+
+        transform.position = targetPosition;
+    }
 }

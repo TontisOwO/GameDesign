@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] Animator enemyAnim;
     float attackTimer;
     float attackTime = 3;
+    bool seesPlayer;
 
 
     //EnemySeek
@@ -40,25 +41,31 @@ public class Enemy : MonoBehaviour
     }
     void Update()
     {
+       
 
-        attackTimer -= Time.deltaTime;
-
-        if(attackTimer < 0)
+        if(seesPlayer)
         {
-            attackTimer = 0;
+            attackTimer -= Time.deltaTime;
+
+            if (attackTimer < 0)
+            {
+                attackTimer = 0;
+            }
+
+            if (attackTimer == 0)
+            {
+                enemyAnim.SetTrigger("Attack");
+                attackTimer = attackTime;
+            }
         }
 
-        if(attackTimer == 0)
-        {
-            enemyAnim.SetTrigger("Attack");
-            attackTimer = attackTime;
-        }
+       
 
         //enemySeek
         transform.position = Vector3.MoveTowards(transform.position, moveTowardsThis.transform.position, 0.035f);
 
         //enemyBehaviour
-        rb.linearVelocity = transform.right * EnemySpeed;
+       // rb.linearVelocity = transform.right * EnemySpeed;
 
 
 
@@ -84,10 +91,27 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D enemy)
     {
+        Debug.Log("Trigger");
+
         //enemyFlip
         if (enemy.tag == ("Enemy"))
         {
             enemy.transform.Rotate(0f, 180f, 0f);
+        }
+
+        if (enemy.gameObject.tag == "Player")
+        {
+           
+            seesPlayer = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D enemy)
+    {
+        if (enemy.gameObject.tag == "Player")
+        {
+           
+            seesPlayer = false;
         }
     }
 
