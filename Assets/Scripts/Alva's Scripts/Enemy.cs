@@ -1,12 +1,22 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 
 public class Enemy : MonoBehaviour
 {
+    //Attack related
+    [SerializeField] Animator enemyAnim;
+    float attackTimer;
+    float attackTime = 3;
+    bool seesPlayer;
+
+
     //EnemySeek
-    GameObject moveTowardsThis;
+
+  
+          GameObject moveTowardsThis;
 
     //Health
     public int MaxHealth = 100;
@@ -31,11 +41,34 @@ public class Enemy : MonoBehaviour
     }
     void Update()
     {
+       
+
+        if(seesPlayer)
+        {
+            attackTimer -= Time.deltaTime;
+
+            if (attackTimer < 0)
+            {
+                attackTimer = 0;
+            }
+
+            if (attackTimer == 0)
+            {
+                enemyAnim.SetTrigger("Attack");
+                attackTimer = attackTime;
+            }
+        }
+
+       
+
         //enemySeek
         transform.position = Vector3.MoveTowards(transform.position, moveTowardsThis.transform.position, 0.035f);
 
         //enemyBehaviour
-        rb.linearVelocity = transform.right * EnemySpeed;
+       // rb.linearVelocity = transform.right * EnemySpeed;
+
+
+
 
     }
 
@@ -58,10 +91,27 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D enemy)
     {
+        Debug.Log("Trigger");
+
         //enemyFlip
         if (enemy.tag == ("Enemy"))
         {
             enemy.transform.Rotate(0f, 180f, 0f);
+        }
+
+        if (enemy.gameObject.tag == "Player")
+        {
+           
+            seesPlayer = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D enemy)
+    {
+        if (enemy.gameObject.tag == "Player")
+        {
+           
+            seesPlayer = false;
         }
     }
 

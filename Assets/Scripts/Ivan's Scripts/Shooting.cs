@@ -1,32 +1,39 @@
-using UnityEditor.ShaderGraph;
 using UnityEngine;
-using System.Collections;
 
 public class Shooting : MonoBehaviour
 {
-    public Transform spawnPos;               // Bullet spawn position
-    public GameObject chargingBulletPrefab;  // Prefab for the charging bullet
-    public GameObject activeBulletPrefab;    // Prefab for the active bullet
+    public float shakeDuration = 0.2f;
+    public float shakeMagnitude = 0.1f;
 
-    // I added screenshake in this script that is activated when the player shoots (Sara)
+    public Transform spawnPos;
+    public GameObject chargingBulletPrefab;
+    public GameObject activeBulletPrefab;
+    public Transform cameraTransform;
+    public AudioClip shootSound;
+    public AudioSource audioSource;
+    public Transform barrelTransform;
+    public ParticleSystem shootParticles; // Particle system reference
 
-    public float shakeDuration = 0.2f;       // Duration of the shake effect
-    public float shakeMagnitude = 0.1f;      // Intensity of the shake effect
-
-    private GameObject chargingBullet;       // Reference to the charging bullet
-    private float chargeTime = 0f;           // Time the button is held
-    private float maxChargeTime = 2f;        // Time needed to reach max charge
-    private bool isCharging = false;         // Whether charging is happening
-
-    private Vector3 originalPos;            // Store the original camera position
-
-    void Start()
-    {
-        originalPos = Camera.main.transform.position; // Store the initial camera position
-    }
+    private GameObject chargingBullet;
+    private float chargeTime = 0f;
+    private float maxChargeTime = 2f;
+    private bool isCharging = false;
+    private Vector3 initialCameraPosition;
+    private float bulletDirection = 1f;
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.A))
+        {
+            barrelTransform.localScale = new Vector3(-1f, 1f, 1f);
+            bulletDirection = -1f;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            barrelTransform.localScale = new Vector3(1f, 1f, 1f);
+            bulletDirection = 1f;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             StartCharging();
@@ -47,67 +54,91 @@ public class Shooting : MonoBehaviour
     {
         isCharging = true;
         chargeTime = 0f;
-
-        // Create the charging bullet without resetting its scale
         chargingBullet = Instantiate(chargingBulletPrefab, spawnPos.position, spawnPos.rotation);
     }
 
     void UpdateCharging()
     {
         chargeTime += Time.deltaTime;
-        chargeTime = Mathf.Clamp(chargeTime, 0f, maxChargeTime); // Limit to max charge time
+        chargeTime = Mathf.Clamp(chargeTime, 0f, maxChargeTime);
 
-        // Make the charging bullet follow the spawn position
         if (chargingBullet != null)
         {
             chargingBullet.transform.position = spawnPos.position;
-
-            // Scale the charging bullet based on charge time
             float chargeScale = Mathf.Lerp(1f, 2f, chargeTime / maxChargeTime);
             chargingBullet.transform.localScale = chargingBulletPrefab.transform.localScale * chargeScale;
         }
-
     }
 
     void FireChargedBullet()
     {
         if (chargingBullet != null)
         {
-            Destroy(chargingBullet); // Remove the charging bullet
+            Destroy(chargingBullet);
         }
 
         isCharging = false;
 
-        // Instantiate the active bullet
         GameObject activeBullet = Instantiate(activeBulletPrefab, spawnPos.position, spawnPos.rotation);
+        Destroy(activeBullet, 5f);
 
-        // Get the Bullet script and set the charge-based damage
         Bullet bulletScript = activeBullet.GetComponent<Bullet>();
         if (bulletScript != null)
         {
             float chargeMultiplier = Mathf.Lerp(1f, 2f, chargeTime / maxChargeTime);
-            bulletScript.SetCharge(chargeMultiplier); // Apply charge multiplier to the active bullet
+            bulletScript.SetCharge(chargeMultiplier);
         }
 
-        // Initiate screen shake
-        StartCoroutine(Shake());
+        Rigidbody2D bulletRb = activeBullet.GetComponent<Rigidbody2D>();
+        if (bulletRb != null)
+        {
+            bulletRb.linearVelocity = new Vector2(bulletDirection * 10f, bulletRb.linearVelocity.y);
+        }
+
+        StartCoroutine(ShakeCamera());
+
+        // Play the shooting sound for 1 second
+        if (audioSource != null && shootSound != null)
+        {
+            audioSource.PlayOneShot(shootSound);
+            StartCoroutine(StopAudioAfterOneSecond());
+        }
+
+        // Play the shooting particle effect
+        if (shootParticles != null)
+        {
+            shootParticles.Play();
+        }
     }
 
-    IEnumerator Shake()
+    System.Collections.IEnumerator StopAudioAfterOneSecond()
     {
+        yield return new WaitForSeconds(0.2f);
+        audioSource.Stop();
+    }
+
+    System.Collections.IEnumerator ShakeCamera()
+    {
+        if (cameraTransform == null)
+        {
+            Debug.LogWarning("Camera Transform is not assigned!");
+            yield break;
+        }
+
+        initialCameraPosition = cameraTransform.position;
         float elapsed = 0f;
 
         while (elapsed < shakeDuration)
         {
-            float x = Random.Range(-shakeMagnitude, shakeMagnitude);
-            float y = Random.Range(-shakeMagnitude, shakeMagnitude);
+            float xOffset = Random.Range(-1f, 1f) * shakeMagnitude;
+            float yOffset = Random.Range(-1f, 1f) * shakeMagnitude;
 
-            Camera.main.transform.position = originalPos + new Vector3(x, y, 0f);
-
+            cameraTransform.position = new Vector3(initialCameraPosition.x + xOffset, initialCameraPosition.y + yOffset, initialCameraPosition.z);
             elapsed += Time.deltaTime;
+
             yield return null;
         }
 
-        Camera.main.transform.position = originalPos; // Reset camera position
+        cameraTransform.position = initialCameraPosition;
     }
 }
