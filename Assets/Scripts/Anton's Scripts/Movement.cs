@@ -10,7 +10,6 @@ public class Movement : MonoBehaviour
 
 {
     Rigidbody2D myRigidbody;
-    BoxCollider2D myCollider;
     [SerializeField] float movementSpeed;
     [SerializeField] float AccelDeccelSpeed;
     [SerializeField] float smallHopFall = 0.5f;
@@ -33,7 +32,6 @@ public class Movement : MonoBehaviour
     void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
-        myCollider = GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -144,20 +142,18 @@ public class Movement : MonoBehaviour
             jumpState = CharacterState.Air;
         }
 
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.D) && jumpState == CharacterState.Grounded)
         {
-            Instantiate(DustParticle, transform.position, transform.rotation);
+            Instantiate(DustParticle, transform.position, Quaternion.Euler(0, 0, 0));
+        }
+        if (Input.GetKeyDown(KeyCode.A) && jumpState == CharacterState.Grounded)
+        {
+            Instantiate(DustParticle, transform.position, Quaternion.Euler(0, 180, 0));
         }
 
         transform.position = movementVector;
     }
-    //void OnCollisionEnter2D(Collision2D other)
-    //{
-    //    if (other.gameObject.CompareTag("Floor"))
-    //    {
-    //        Land();
-    //    }
-    //}
+    
     public void Land(float groundSpeed)
     {
         jumpState = CharacterState.Grounded;
@@ -170,13 +166,7 @@ public class Movement : MonoBehaviour
         jumpState = CharacterState.Grounded;
         fellOff = false;
     }
-    //void OnCollisionExit2D(Collision2D other)
-    //{
-    //    if (jumpState != CharacterState.Jumping)
-    //    {
-    //        FallOff();
-    //    }
-    //}
+    
     public void FallOff(Vector2 groundSpeed)
     {
         fellOff = true;
