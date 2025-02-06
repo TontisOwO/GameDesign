@@ -329,9 +329,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1150959087863272390, guid: 88e0798bc2ece774381bc7ba5868324b, type: 3}
     - target: {fileID: 4998885546140963642, guid: 19f50a323e4ffa94e99e15d2d0d253c4, type: 3}
+      propertyPath: gunTransform
+      value: 
+      objectReference: {fileID: 8839512574621513359}
+    - target: {fileID: 4998885546140963642, guid: 19f50a323e4ffa94e99e15d2d0d253c4, type: 3}
       propertyPath: chargedBullet
       value: 
       objectReference: {fileID: 1150959087863272390, guid: 5bbc0bc5849498244bb47260bbebc474, type: 3}
+    - target: {fileID: 4998885546140963642, guid: 19f50a323e4ffa94e99e15d2d0d253c4, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 8435505839985715498}
     - target: {fileID: 4998885546140963642, guid: 19f50a323e4ffa94e99e15d2d0d253c4, type: 3}
       propertyPath: activeBulletPrefab
       value: 

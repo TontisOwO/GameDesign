@@ -48,6 +48,13 @@ public class Movement : MonoBehaviour
                 movementSpeedLeft += Time.deltaTime * movementSpeed * AccelDeccelSpeed;
             }
             movementVector.x -= movementSpeedLeft * Time.deltaTime;
+
+            // Flip character to the left
+            if (transform.localScale.x > 0)  // Check if the character is not already flipped
+            {
+                // Only flip the x scale, keep y and z the same
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
         }
         else if (movementSpeedLeft > movementSpeed * 0.25f)
         {
@@ -71,6 +78,13 @@ public class Movement : MonoBehaviour
                 movementSpeedRight += Time.deltaTime * movementSpeed * AccelDeccelSpeed;
             }
             movementVector.x += movementSpeedRight * Time.deltaTime;
+
+            // Flip character to the right
+            if (transform.localScale.x < 0)  // Check if the character is flipped
+            {
+                // Only flip the x scale, keep y and z the same
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
         }
         else if (movementSpeedRight > movementSpeed * 0.25f)
         {
