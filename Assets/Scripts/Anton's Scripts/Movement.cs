@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 enum CharacterState
@@ -108,16 +109,20 @@ public class Movement : MonoBehaviour
             }
             myRigidbody.linearVelocityY += jumpSpeed;
             jumpState = CharacterState.Jumping;
-            myAnimator.isMoving = true;
+            myAnimator.SetBool("pressJump", true);
         }
 
         if (jumpState == CharacterState.Jumping)
         {
             jumpTime += Time.deltaTime;
+            myAnimator.SetBool("isMoving", false);
+
         }
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
+            myAnimator.SetBool("pressJump", false);
+
             jumpState = CharacterState.Air;
 
             switch (jumpTime, jumpTime)
@@ -157,17 +162,32 @@ public class Movement : MonoBehaviour
         {
             timeAfterWalkOff = 0;
             jumpState = CharacterState.Air;
+            myAnimator.SetBool("isMoving", false);
+
         }
 
         if (Input.GetKeyDown(KeyCode.D) && jumpState == CharacterState.Grounded)
         {
+
             Instantiate(DustParticle, new Vector2(transform.position.x - 0.7f, transform.position.y - 8.4975f/2), Quaternion.Euler(0, 0, 0));
         }
         if (Input.GetKeyDown(KeyCode.A) && jumpState == CharacterState.Grounded)
         {
+
             Instantiate(DustParticle, new Vector2(transform.position.x + 0.7f, transform.position.y - 8.4975f / 2), Quaternion.Euler(0, 180, 0));
         }
-
+        if ((movingLeft ||movingRight) && jumpState == CharacterState.Grounded)
+        {
+            myAnimator.SetBool("isMoving", true);
+        }
+        if (!movingLeft && !movingRight)
+        {
+            myAnimator.SetBool("isMoving", false);
+        }
+        if (myRigidbody.linearVelocityY <= 0)
+        {
+            myAnimator.SetBool("pressJump", false);
+        }
         transform.position = movementVector;
     }
     

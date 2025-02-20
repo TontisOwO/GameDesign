@@ -9,6 +9,7 @@ public class PickupScript : MonoBehaviour
         {
             collision.gameObject.GetComponent<PlayerHealth>().health += 1;
             Destroy(gameObject);
+            Debug.Log("healed!");
         }
     }
 }

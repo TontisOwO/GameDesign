@@ -132,8 +132,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803665854d86a3c43b30cb49cb5efcd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shakeDuration: 0.2
+  shakeMagnitude: 0.1
   spawnPos: {fileID: 1115881001294147021}
   chargingBulletPrefab: {fileID: 5488512241320822151, guid: 92b93b73f38589b4db5dc7591edd6ebf, type: 3}
   activeBulletPrefab: {fileID: 5488512241320822151, guid: 03a85cc32b00af74a9a94d220e1ace50, type: 3}
-  shakeDuration: 0.2
-  shakeMagnitude: 0.1
+  cameraTransform: {fileID: 0}
+  shootSound: {fileID: 0}
+  audioSource: {fileID: 0}
+  barrelTransform: {fileID: 0}
+  shootParticles: {fileID: 0}
