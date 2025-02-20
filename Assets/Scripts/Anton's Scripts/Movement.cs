@@ -158,11 +158,11 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.D) && jumpState == CharacterState.Grounded)
         {
-            Instantiate(DustParticle, transform.position, Quaternion.Euler(0, 0, 0));
+            Instantiate(DustParticle, new Vector2(transform.position.x - 0.7f, transform.position.y - 8.4975f/2), Quaternion.Euler(0, 0, 0));
         }
         if (Input.GetKeyDown(KeyCode.A) && jumpState == CharacterState.Grounded)
         {
-            Instantiate(DustParticle, transform.position, Quaternion.Euler(0, 180, 0));
+            Instantiate(DustParticle, new Vector2(transform.position.x + 0.7f, transform.position.y - 8.4975f / 2), Quaternion.Euler(0, 180, 0));
         }
 
         transform.position = movementVector;

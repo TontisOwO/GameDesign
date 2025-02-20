@@ -46,6 +46,6 @@ public class GameManager : MonoBehaviour
 
     public void start()
     {
-        SceneManager.LoadScene("Saras Scene");
+        SceneManager.LoadScene("Alvas Scene");
     }
 }

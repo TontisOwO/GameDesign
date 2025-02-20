@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.163
       objectReference: {fileID: 0}
+    - target: {fileID: 2640556156054282351, guid: 9bedc95a90e29ea44b2841a4b5128e8a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2824693838813188275, guid: 9bedc95a90e29ea44b2841a4b5128e8a, type: 3}
       propertyPath: m_Name
       value: Player
@@ -186,6 +190,14 @@ PrefabInstance:
     - target: {fileID: 2824693838813188275, guid: 9bedc95a90e29ea44b2841a4b5128e8a, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899860305810073720, guid: 9bedc95a90e29ea44b2841a4b5128e8a, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899860305810073720, guid: 9bedc95a90e29ea44b2841a4b5128e8a, type: 3}
+      propertyPath: m_FlipY
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -353,7 +365,7 @@ MonoBehaviour:
   MaxHealth: 100
   CurrentHealth: 100
   LifeTotal: 3
-  EnemySpeed: 5
+  EnemySpeed: 15
   rb: {fileID: 379622876}
 --- !u!95 &379622872 stripped
 Animator:
@@ -400,7 +412,7 @@ GameObject:
   - component: {fileID: 385012456}
   m_Layer: 7
   m_Name: Pillarcollider
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -651,7 +663,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -4.0268, y: -6.791953}
+  m_Offset: {x: -0.27, y: -6.8073463}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -661,7 +673,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.0043197, y: 0.74393654}
+  m_Size: {x: 3.0043201, y: 0.77472353}
   m_EdgeRadius: 0
 --- !u!1 &499037013
 GameObject:
@@ -946,7 +958,7 @@ GameObject:
   - component: {fileID: 742453955}
   m_Layer: 7
   m_Name: pillar drag and drop3
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1034,7 +1046,7 @@ GameObject:
   - component: {fileID: 746535031}
   m_Layer: 7
   m_Name: pillar drag and drop3 (2)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1123,7 +1135,7 @@ GameObject:
   - component: {fileID: 764125543}
   m_Layer: 7
   m_Name: Pillarcollider (2)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1320,14 +1332,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b2712fc1695d94085e26c3929bebb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 12
-  AccelDeccelSpeed: 7
-  smallHopFall: 7
+  movementSpeed: 24
+  AccelDeccelSpeed: 14
+  smallHopFall: 18
   coyoteTime: 0.15
-  jumpSpeed: 20
+  jumpSpeed: 60
   jumpState: 0
   timeAfterWalkOff: 0
-  DustParticle: {fileID: 1428751331}
+  DustParticle: {fileID: 2844740396991405199, guid: 3d9240024954c4544ac2e3f3dc828afa, type: 3}
 --- !u!114 &979148621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1363,7 +1375,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1409,7 +1421,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -3.8163013, y: -2.9458702}
+  m_Offset: {x: 0, y: -2.9458702}
   m_Size: {x: 2.8801136, y: 8.4975}
   m_Direction: 0
 --- !u!58 &979148631
@@ -1446,7 +1458,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -4.191942, y: -0.9062293}
+  m_Offset: {x: -0.7, y: -0.9062293}
   m_Radius: 9.246798
 --- !u!1 &1157305928
 GameObject:
@@ -1720,11 +1732,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1428751331 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8458850809176850282, guid: 49a8781a3dba890478c4731d39bab179, type: 3}
-  m_PrefabInstance: {fileID: 6206987299633882847}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1856706064 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6488853531055959180, guid: a9066eeccd0406244acc820cfaa03c4d, type: 3}
@@ -1779,7 +1786,7 @@ GameObject:
   - component: {fileID: 1879627139}
   m_Layer: 7
   m_Name: Pillarcollider (1)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1884,7 +1891,7 @@ GameObject:
   - component: {fileID: 1960664555}
   m_Layer: 7
   m_Name: pillar drag and drop3 (1)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1960,63 +1967,6 @@ Transform:
   - {fileID: 764125542}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &6206987299633882847
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3664458386902807270, guid: 49a8781a3dba890478c4731d39bab179, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -255.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3664458386902807270, guid: 49a8781a3dba890478c4731d39bab179, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 15.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3664458386902807270, guid: 49a8781a3dba890478c4731d39bab179, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3664458386902807270, guid: 49a8781a3dba890478c4731d39bab179, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3664458386902807270, guid: 49a8781a3dba890478c4731d39bab179, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3664458386902807270, guid: 49a8781a3dba890478c4731d39bab179, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3664458386902807270, guid: 49a8781a3dba890478c4731d39bab179, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3664458386902807270, guid: 49a8781a3dba890478c4731d39bab179, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3664458386902807270, guid: 49a8781a3dba890478c4731d39bab179, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3664458386902807270, guid: 49a8781a3dba890478c4731d39bab179, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8458850809176850282, guid: 49a8781a3dba890478c4731d39bab179, type: 3}
-      propertyPath: m_Name
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 49a8781a3dba890478c4731d39bab179, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2032,6 +1982,5 @@ SceneRoots:
   - {fileID: 746535032}
   - {fileID: 1960664556}
   - {fileID: 549430136}
-  - {fileID: 6206987299633882847}
   - {fileID: 499037015}
   - {fileID: 400753454}
