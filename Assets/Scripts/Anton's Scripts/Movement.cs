@@ -29,9 +29,11 @@ public class Movement : MonoBehaviour
 
     [SerializeField] GameObject DustParticle;
 
+    Animator myAnimator;
     void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
     }
 
     void Update()
@@ -106,6 +108,7 @@ public class Movement : MonoBehaviour
             }
             myRigidbody.linearVelocityY += jumpSpeed;
             jumpState = CharacterState.Jumping;
+            myAnimator.isMoving = true;
         }
 
         if (jumpState == CharacterState.Jumping)
